@@ -11,3 +11,42 @@ project/plugins/project/
 
 # Scala-IDE specific
 .scala_dependencies
+# use glob syntax.
+syntax: glob
+*.ser
+*.class
+*~
+*.bak
+*.off
+*.old
+.DS_Store
+.cache
+
+# logs
+derby.log
+log.roo
+
+
+# eclipse conf file
+.settings
+.classpath
+.project
+.manager
+.externalToolBuilders
+
+# building
+target
+null
+tmp*
+dist
+test-output
+
+# sbt
+target
+lib_managed
+src_managed
+project/boot
+project/plugins/project
+
+#LDAP Creds
+src/main/resources/META-INF/spring/ldap.properties
