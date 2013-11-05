@@ -1,5 +1,6 @@
 package com.addicks.helpdesk.service.ldap;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -48,7 +49,15 @@ public class ContactDaoTest {
 
   @Test
   public void shouldReturnAppUser() {
-    System.out.println("App User: " + contactDAO.findUserByLastName("Addicks"));
-  }
+    AppUser user = new AppUser();
+    user.setDescription(null);
+    user.setLastName("Addicks");
+    user.setFullName("Brian Addicks");
+    user.setLastResetPassword(null);
 
+    List<AppUser> users = contactDAO.findUserByLastName("Addicks");
+
+    assertTrue(users.size() == 1);
+    assertEquals(user, users.get(0));
+  }
 }

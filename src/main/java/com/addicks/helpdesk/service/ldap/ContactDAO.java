@@ -14,6 +14,7 @@ import org.springframework.ldap.query.LdapQuery;
 import org.springframework.stereotype.Service;
 
 import com.addicks.helpdesk.domain.AppUser;
+import com.addicks.helpdesk.domain.ldap.mapper.AppUserAttributesMapper;
 
 @Service
 public class ContactDAO implements ContactDAOInterface {
@@ -41,11 +42,6 @@ public class ContactDAO implements ContactDAOInterface {
     LdapQuery query = query().attributes("cn", "sn").where("objectclass").is("person").and("sn")
         .is(lastName);
 
-    return ldapTemplate.search(query, new AttributesMapper() {
-      @Override
-      public Object mapFromAttributes(final Attributes attrs) throws NamingException {
-        return attrs.get("cn").get();
-      }
-    });
+    return ldapTemplate.search(query, new AppUserAttributesMapper());
   }
 }
