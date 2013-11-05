@@ -8,7 +8,6 @@ import javax.naming.NamingException;
 import javax.naming.directory.Attributes;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.query.LdapQuery;
@@ -21,9 +20,6 @@ public class ContactDAO implements ContactDAOInterface {
 
   @Autowired
   private LdapTemplate ldapTemplate;
-
-  @Value("${ldap.ldapStyleDn}")
-  private String DN;
 
   @Override
   public List<String> getAllContactNames() {
