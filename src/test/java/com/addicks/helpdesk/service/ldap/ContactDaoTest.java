@@ -25,7 +25,7 @@ public class ContactDaoTest {
   ContactDAO contactDAO;
 
   @Test
-  public void shouldFindNames() {
+  public void getAllContactNamesShouldFindNames() {
     List<String> allContactNames = contactDAO.getAllContactNames();
 
     assertNotNull(allContactNames);
@@ -35,12 +35,12 @@ public class ContactDaoTest {
   }
 
   @Test
-  public void shouldReturnNull() {
+  public void findUserByLastNameShouldReturnNull() {
     assertNull(contactDAO.findUserByLastName(null));
   }
 
   @Test
-  public void shouldReturnEmptyList() {
+  public void findUserByLastNameShouldReturnEmptyList() {
     List<AppUser> users = contactDAO.findUserByLastName("asdfjlksjfdldsjlkfjds");
 
     assertNotNull(users);
@@ -48,7 +48,7 @@ public class ContactDaoTest {
   }
 
   @Test
-  public void shouldReturnAppUser() {
+  public void findUserByLastNameShouldReturnAppUser() {
     AppUser user = new AppUser();
     user.setDescription(null);
     user.setLastName("Addicks");
@@ -59,5 +59,10 @@ public class ContactDaoTest {
 
     assertTrue(users.size() == 1);
     assertEquals(user, users.get(0));
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void changeUserPasswordShouldThrowException() {
+    contactDAO.changeUserPassword(null, null);
   }
 }

@@ -8,4 +8,6 @@ public interface ContactDAOInterface {
   public List<String> getAllContactNames();
 
   public List<AppUser> findUserByLastName(String lastName);
+
+  public void changeUserPassword(String dn, String newPassword);
 }

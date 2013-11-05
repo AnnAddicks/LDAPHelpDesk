@@ -44,4 +44,12 @@ public class ContactDAO implements ContactDAOInterface {
 
     return ldapTemplate.search(query, new AppUserAttributesMapper());
   }
+
+  @Override
+  public void changeUserPassword(final String dn, final String newPassword) {
+    if (dn == null || newPassword == null) {
+      throw new IllegalArgumentException("Dn and new password cannot be null.");
+    }
+
+  }
 }
