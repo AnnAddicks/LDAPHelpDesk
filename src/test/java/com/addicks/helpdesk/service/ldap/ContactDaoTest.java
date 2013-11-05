@@ -1,6 +1,7 @@
 package com.addicks.helpdesk.service.ldap;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.ldap.InvalidNameException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -21,12 +23,22 @@ public class ContactDaoTest {
   ContactDAO contactDAO;
 
   @Test
-  public void test() {
+  public void shouldFindNames() {
     List<String> allContactNames = contactDAO.getAllContactNames();
 
     assertNotNull(allContactNames);
     assertTrue(allContactNames.contains("Administrator"));
     assertTrue(allContactNames.contains("Guest"));
     assertTrue(allContactNames.contains("Brian Addicks"));
+  }
+
+  @Test
+  public void shouldReturnNull() {
+    assertNull(contactDAO.findUser(null));
+  }
+
+  @Test(expected = InvalidNameException.class)
+  public void shouldReturnException() {
+    assertNull(contactDAO.findUser("asdfjlksjfdldsjlkfjds"));
   }
 }

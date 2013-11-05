@@ -5,6 +5,9 @@
     <page:list id="pl_com_addicks_helpdesk_domain_AppUser" items="${appusers}" z="KuJ0XBQElOWScTKh2grMq2IFKBs=">
         <table:table data="${appusers}" id="l_com_addicks_helpdesk_domain_AppUser" path="/appusers" z="Skfonu3aO/7U8n1af3bbgppOM4U=">
             <table:column calendar="true" dateTimePattern="${appUser_lastresetpassword_date_format}" id="c_com_addicks_helpdesk_domain_AppUser_lastResetPassword" property="lastResetPassword" z="KwTi3eVHsft/BRrfwSTou8jSiB8="/>
+            <table:column id="c_com_addicks_helpdesk_domain_AppUser_fullName" property="fullName" z="SksDW1KlhMsqYMEz1VXn7uT2MpI="/>
+            <table:column id="c_com_addicks_helpdesk_domain_AppUser_lastName" property="lastName" z="iQSCJJSUFkFEBFLc0M8tkgJPXcc="/>
+            <table:column id="c_com_addicks_helpdesk_domain_AppUser_description" property="description" z="VonqvNHq8VJwvpfAdlJ7kZ7jQws="/>
         </table:table>
     </page:list>
 </div>

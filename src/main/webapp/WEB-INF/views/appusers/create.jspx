@@ -4,6 +4,9 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_com_addicks_helpdesk_domain_AppUser" modelAttribute="appUser" path="/appusers" render="${empty dependencies}" z="wRwUJ6tcliSYpaN05PQAucjvb1Y=">
         <field:datetime dateTimePattern="${appUser_lastresetpassword_date_format}" field="lastResetPassword" id="c_com_addicks_helpdesk_domain_AppUser_lastResetPassword" z="YPLmYi21zlThmvZSlvvj11X8lC8="/>
+        <field:input field="fullName" id="c_com_addicks_helpdesk_domain_AppUser_fullName" z="wAbjFm2qaflYJU3SRyxhiNkF3yk="/>
+        <field:input field="lastName" id="c_com_addicks_helpdesk_domain_AppUser_lastName" z="5XXd21S1psltlDKVBDhGuCKesIQ="/>
+        <field:input field="description" id="c_com_addicks_helpdesk_domain_AppUser_description" z="RxRXyM4nsTv6EYZqYSkMRm3uLXI="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_addicks_helpdesk_domain_AppUser" render="${not empty dependencies}" z="VZ2DzvetQyPXxCgeAUR3Fv1zyxY="/>
 </div>

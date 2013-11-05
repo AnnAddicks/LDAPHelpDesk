@@ -12,6 +12,9 @@ import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.stereotype.Service;
 
+import com.addicks.helpdesk.domain.AppUser;
+import com.addicks.helpdesk.domain.ldap.mapper.AppUserAttributesMapper;
+
 @Service
 public class ContactDAO implements ContactDAOInterface {
 
@@ -27,6 +30,15 @@ public class ContactDAO implements ContactDAOInterface {
             return (String) attrs.get("cn").get();
           }
         });
+  }
+
+  @Override
+  public AppUser findUser(final String dn) {
+    if (dn == null) {
+      return null;
+    }
+
+    return ldapTemplate.lookup(dn, new AppUserAttributesMapper());
   }
 
 }

@@ -4,5 +4,8 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_com_addicks_helpdesk_domain_AppUser" modelAttribute="appUser" path="/appusers" versionField="Version" z="2XMOQ/xFbYmTM513AJNiC2Cj2p0=">
         <field:datetime dateTimePattern="${appUser_lastresetpassword_date_format}" field="lastResetPassword" id="c_com_addicks_helpdesk_domain_AppUser_lastResetPassword" z="YPLmYi21zlThmvZSlvvj11X8lC8="/>
+        <field:input field="fullName" id="c_com_addicks_helpdesk_domain_AppUser_fullName" z="wAbjFm2qaflYJU3SRyxhiNkF3yk="/>
+        <field:input field="lastName" id="c_com_addicks_helpdesk_domain_AppUser_lastName" z="5XXd21S1psltlDKVBDhGuCKesIQ="/>
+        <field:input field="description" id="c_com_addicks_helpdesk_domain_AppUser_description" z="RxRXyM4nsTv6EYZqYSkMRm3uLXI="/>
     </form:update>
 </div>

@@ -4,5 +4,8 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_com_addicks_helpdesk_domain_AppUser" object="${appuser}" path="/appusers" z="IP3iES0Edvl2bwWPLk6mNEL5TkM=">
         <field:display calendar="true" dateTimePattern="${appUser_lastresetpassword_date_format}" field="lastResetPassword" id="s_com_addicks_helpdesk_domain_AppUser_lastResetPassword" object="${appuser}" z="biRDcfQYaJc3rZ7HTIi+i++6jWg="/>
+        <field:display field="fullName" id="s_com_addicks_helpdesk_domain_AppUser_fullName" object="${appuser}" z="sMjkC8KK+0v/0jNwEz3QtWPO0HM="/>
+        <field:display field="lastName" id="s_com_addicks_helpdesk_domain_AppUser_lastName" object="${appuser}" z="QNZJR04dbYaPK6s5XENErLZK5mA="/>
+        <field:display field="description" id="s_com_addicks_helpdesk_domain_AppUser_description" object="${appuser}" z="N+yN2v2n035fbvGSX83LzDpcQKQ="/>
     </page:show>
 </div>
