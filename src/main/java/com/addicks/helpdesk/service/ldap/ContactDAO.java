@@ -2,7 +2,6 @@ package com.addicks.helpdesk.service.ldap;
 
 import static org.springframework.ldap.query.LdapQueryBuilder.query;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -20,7 +19,7 @@ public class ContactDAO implements ContactDAOInterface {
   private LdapTemplate ldapTemplate;
 
   @Override
-  public List getAllContactNames() {
+  public List<String> getAllContactNames() {
     return ldapTemplate.search(query().where("objectclass").is("person"),
         new AttributesMapper<String>() {
           @Override
@@ -28,16 +27,6 @@ public class ContactDAO implements ContactDAOInterface {
             return (String) attrs.get("cn").get();
           }
         });
-  }
-
-  @Override
-  public List getContactDetails(final String objectclass) {
-    // AndFilter andFilter = new AndFilter();
-    // andFilter.and(new EqualsFilter("objectClass", objectclass));
-    // System.out.println("LDAP Query " + andFilter.encode());
-    // return ldapTemplate.search("", andFilter.encode(), new
-    // ContactAttributeMapper());
-    return Collections.EMPTY_LIST;
   }
 
 }

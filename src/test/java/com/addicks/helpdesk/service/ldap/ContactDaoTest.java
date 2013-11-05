@@ -1,5 +1,10 @@
 package com.addicks.helpdesk.service.ldap;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +22,11 @@ public class ContactDaoTest {
 
   @Test
   public void test() {
-    System.out.println("People: " + contactDAO.getAllContactNames());
-  }
+    List<String> allContactNames = contactDAO.getAllContactNames();
 
+    assertNotNull(allContactNames);
+    assertTrue(allContactNames.contains("Administrator"));
+    assertTrue(allContactNames.contains("Guest"));
+    assertTrue(allContactNames.contains("Brian Addicks"));
+  }
 }
