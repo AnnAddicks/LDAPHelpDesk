@@ -7,5 +7,5 @@ import com.addicks.helpdesk.domain.AppUser;
 public interface ContactDAOInterface {
   public List<String> getAllContactNames();
 
-  public AppUser findUser(String dn);
+  public List<AppUser> findUserByLastName(String lastName);
 }

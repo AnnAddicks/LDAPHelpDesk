@@ -8,18 +8,22 @@ import javax.naming.NamingException;
 import javax.naming.directory.Attributes;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
+import org.springframework.ldap.query.LdapQuery;
 import org.springframework.stereotype.Service;
 
 import com.addicks.helpdesk.domain.AppUser;
-import com.addicks.helpdesk.domain.ldap.mapper.AppUserAttributesMapper;
 
 @Service
 public class ContactDAO implements ContactDAOInterface {
 
   @Autowired
   private LdapTemplate ldapTemplate;
+
+  @Value("${ldap.ldapStyleDn}")
+  private String DN;
 
   @Override
   public List<String> getAllContactNames() {
@@ -33,12 +37,19 @@ public class ContactDAO implements ContactDAOInterface {
   }
 
   @Override
-  public AppUser findUser(final String dn) {
-    if (dn == null) {
+  public List<AppUser> findUserByLastName(final String lastName) {
+    if (lastName == null) {
       return null;
     }
 
-    return ldapTemplate.lookup(dn, new AppUserAttributesMapper());
-  }
+    LdapQuery query = query().attributes("cn", "sn").where("objectclass").is("person").and("sn")
+        .is(lastName);
 
+    return ldapTemplate.search(query, new AttributesMapper() {
+      @Override
+      public Object mapFromAttributes(final Attributes attrs) throws NamingException {
+        return attrs.get("cn").get();
+      }
+    });
+  }
 }
