@@ -8,7 +8,6 @@ import com.addicks.helpdesk.domain.AppUserDataOnDemand;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -17,24 +16,24 @@ import javax.validation.ConstraintViolationException;
 import org.springframework.stereotype.Component;
 
 privileged aspect AppUserDataOnDemand_Roo_DataOnDemand {
-    
+
     declare @type: AppUserDataOnDemand: @Component;
-    
+
     private Random AppUserDataOnDemand.rnd = new SecureRandom();
-    
+
     private List<AppUser> AppUserDataOnDemand.data;
-    
+
     public AppUser AppUserDataOnDemand.getNewTransientAppUser(int index) {
         AppUser obj = new AppUser();
         setLastResetPassword(obj, index);
         return obj;
     }
-    
+
     public void AppUserDataOnDemand.setLastResetPassword(AppUser obj, int index) {
         Calendar lastResetPassword = Calendar.getInstance();
         obj.setLastResetPassword(lastResetPassword);
     }
-    
+
     public AppUser AppUserDataOnDemand.getSpecificAppUser(int index) {
         init();
         if (index < 0) {
@@ -47,18 +46,18 @@ privileged aspect AppUserDataOnDemand_Roo_DataOnDemand {
         Long id = obj.getId();
         return AppUser.findAppUser(id);
     }
-    
+
     public AppUser AppUserDataOnDemand.getRandomAppUser() {
         init();
         AppUser obj = data.get(rnd.nextInt(data.size()));
         Long id = obj.getId();
         return AppUser.findAppUser(id);
     }
-    
+
     public boolean AppUserDataOnDemand.modifyAppUser(AppUser obj) {
         return false;
     }
-    
+
     public void AppUserDataOnDemand.init() {
         int from = 0;
         int to = 10;
@@ -69,7 +68,7 @@ privileged aspect AppUserDataOnDemand_Roo_DataOnDemand {
         if (!data.isEmpty()) {
             return;
         }
-        
+
         data = new ArrayList<AppUser>();
         for (int i = 0; i < 10; i++) {
             AppUser obj = getNewTransientAppUser(i);
@@ -87,5 +86,5 @@ privileged aspect AppUserDataOnDemand_Roo_DataOnDemand {
             data.add(obj);
         }
     }
-    
+
 }
