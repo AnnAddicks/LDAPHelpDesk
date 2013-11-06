@@ -22,7 +22,7 @@ import com.addicks.helpdesk.domain.AppUser;
 public class ContactDaoTest {
 
   @Autowired
-  ContactDAO contactDAO;
+  private ContactDAO contactDAO;
 
   @Test
   public void getAllContactNamesShouldFindNames() {

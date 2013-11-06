@@ -1,5 +1,7 @@
 package com.addicks.helpdesk.service.ldap;
 
+import java.security.SecureRandom;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class PasswordDaoTest {
 
   @Autowired
-  PasswordDAO passwordDao;
+  private PasswordDAO passwordDao;
+
+  private SecureRandom random = new SecureRandom();
 
   @Test(expected = IllegalArgumentException.class)
   public void changeUserPasswordShouldThrowException() {
