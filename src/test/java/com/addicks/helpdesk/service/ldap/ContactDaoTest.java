@@ -61,8 +61,4 @@ public class ContactDaoTest {
     assertEquals(user, users.get(0));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void changeUserPasswordShouldThrowException() {
-    contactDAO.changeUserPassword(null, null);
-  }
 }

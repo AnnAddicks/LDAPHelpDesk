@@ -9,5 +9,4 @@ public interface ContactDAOInterface {
 
   public List<AppUser> findUserByLastName(String lastName);
 
-  public void changeUserPassword(String dn, String newPassword);
 }
