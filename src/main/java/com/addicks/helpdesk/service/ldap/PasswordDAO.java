@@ -39,4 +39,8 @@ public class PasswordDAO implements PasswordDAOInterface {
 
   }
 
+  @Override
+  public boolean authenticate(final String dn, final String password) {
+    return ldapTemplate.authenticate("", "(dn=" + dn + ")", password);
+  }
 }

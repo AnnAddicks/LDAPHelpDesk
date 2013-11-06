@@ -1,5 +1,8 @@
 package com.addicks.helpdesk.service.ldap;
 
+import static org.junit.Assert.assertTrue;
+
+import java.math.BigInteger;
 import java.security.SecureRandom;
 
 import org.junit.Test;
@@ -24,4 +27,14 @@ public class PasswordDaoTest {
     passwordDao.changeUserPassword(null, null);
   }
 
+  @Test
+  public void changeUserPasswordShouldChangePassword() {
+    // "!@#$%^&*()_+=~" +
+    String newPassword = new BigInteger(130, random).toString(32);
+    String dn = "CN=Zoe Washburne";
+
+    passwordDao.changeUserPassword(dn, newPassword);
+
+    assertTrue(passwordDao.authenticate(dn, newPassword));
+  }
 }
