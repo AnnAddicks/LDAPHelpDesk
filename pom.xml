@@ -335,7 +335,7 @@
     <dependency>
       <groupId>com.cedarsoft.serialization.generator</groupId>
       <artifactId>jackson</artifactId>
-      <version>4.1.3</version>
+      <version>5.0.0</version>
     </dependency>
     <!-- LDAP -->
     <dependency>
