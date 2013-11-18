@@ -27,6 +27,12 @@ public class AppUser {
 
   private String description;
 
+  private String uid;
+
+  public AppUser() {
+
+  }
+
   public Calendar getLastResetPassword() {
     return lastResetPassword;
   }
@@ -57,6 +63,14 @@ public class AppUser {
 
   public void setDescription(final String description) {
     this.description = description;
+  }
+
+  public String getUid() {
+    return uid;
+  }
+
+  public void setUid(final String uid) {
+    this.uid = uid;
   }
 
   @Override
@@ -109,7 +123,7 @@ public class AppUser {
   @Override
   public String toString() {
     return "AppUser [lastResetPassword=" + lastResetPassword + ", fullName=" + fullName
-        + ", lastName=" + lastName + ", description=" + description + "]";
+        + ", lastName=" + lastName + ", description=" + description + ", uid=" + uid + "]";
   }
 
 }

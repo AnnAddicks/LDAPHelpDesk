@@ -59,6 +59,7 @@ public class ContactDaoTest {
 
     assertTrue(users.size() == 1);
     assertEquals(user, users.get(0));
+
   }
 
 }

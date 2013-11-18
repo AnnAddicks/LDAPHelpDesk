@@ -1,35 +1,24 @@
 package utils;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
-import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.JavaType;
+
+import com.addicks.helpdesk.domain.AppUser;
 
 public class JSONConverter<T> {
   public static String APP_USER = "/mockedJsonData/AppUser.json";
 
-  public List<T> getObjectsFromData(final String jsonFileName, final Class<?> clazz)
-      throws JsonParseException, JsonMappingException, IOException {
+  public AppUser getAppUser() throws JsonGenerationException, JsonMappingException, IOException {
 
+    AppUser user = new AppUser();
     ObjectMapper mapper = new ObjectMapper();
 
-    JavaType type = mapper.getTypeFactory().constructCollectionType(List.class, clazz);
-    List<T> fileObjects = mapper.readValue(this.getClass().getResource(jsonFileName), type);
+    mapper.writeValue(new File(APP_USER), user);
 
-    return fileObjects;
-  }
-
-  public T getObjectFromData(final String jsonFileName, final Class<?> clazz)
-      throws JsonParseException, JsonMappingException, IOException {
-
-    ObjectMapper mapper = new ObjectMapper();
-
-    JavaType type = mapper.getTypeFactory().constructCollectionType(List.class, clazz);
-    T fileObject = mapper.readValue(this.getClass().getResource(jsonFileName), type);
-
-    return fileObject;
+    return user;
   }
 }

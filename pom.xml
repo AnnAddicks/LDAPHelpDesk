@@ -333,9 +333,10 @@
       <version>${spring-security.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.cedarsoft.serialization.generator</groupId>
-      <artifactId>jackson</artifactId>
-      <version>5.0.0</version>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-mapper-asl</artifactId>
+      <version>1.9.8</version>
+      <scope>provided</scope>
     </dependency>
     <!-- LDAP -->
     <dependency>

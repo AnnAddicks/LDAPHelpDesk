@@ -24,6 +24,10 @@ public class AppUserAttributesMapper implements AttributesMapper<AppUser> {
     if (attrs.get("description") != null) {
       user.setDescription((String) attrs.get("description").get());
     }
+
+    if (attrs.get("uid") != null) {
+      user.setUid((String) attrs.get("uid").get());
+    }
     return user;
   }
 }
