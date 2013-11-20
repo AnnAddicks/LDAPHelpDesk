@@ -6,6 +6,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 
 import javax.net.SocketFactory;
@@ -13,39 +14,55 @@ import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 import org.springframework.stereotype.Service;
 
+/**
+ * Welcome all MITM attacks!
+ * 
+ * This is intended to be used internally and not to be accessed outside the
+ * company where internal devices such as a PA are unsigned or self-signed.
+ */
 @Service
 public class TrustingSSLSocketFactory extends SocketFactory {
-  // Create a trust manager that does not validate certificate chains
-  private TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
-    @Override
-    public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-      return null;
-    }
 
-    @Override
-    public void checkClientTrusted(final X509Certificate[] certs, final String authType) {
-    }
+  private static SocketFactory trustingFactory;
 
-    @Override
-    public void checkServerTrusted(final X509Certificate[] certs, final String authType) {
-    }
-  } };
-
-  private SocketFactory trustingFactory;
+  static {
+    disableCertificateValidation();
+  }
 
   public TrustingSSLSocketFactory() {
+
+  }
+
+  public static void disableCertificateValidation() {
+    // Create a trust manager that does not validate certificate chains
+    TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
+      @Override
+      public X509Certificate[] getAcceptedIssuers() {
+        return new X509Certificate[0];
+      }
+
+      @Override
+      public void checkClientTrusted(final X509Certificate[] certs, final String authType) {
+      }
+
+      @Override
+      public void checkServerTrusted(final X509Certificate[] certs, final String authType) {
+      }
+    } };
+
     // Install the all-trusting trust manager
     SSLContext sc = null;
 
     try {
       sc = SSLContext.getInstance("SSL");
-      sc.init(null, trustAllCerts, new java.security.SecureRandom());
-      HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+      sc.init(null, trustAllCerts, new SecureRandom());
+      SSLContext.setDefault(sc);
     }
     catch (NoSuchAlgorithmException e1) {
       // TODO Auto-generated catch block
@@ -64,9 +81,11 @@ public class TrustingSSLSocketFactory extends SocketFactory {
       }
     };
 
+    trustingFactory = sc.getSocketFactory();
+
     // Install the all-trusting host verifier
     HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
-    trustingFactory = sc.getSocketFactory();
+    HttpsURLConnection.setDefaultSSLSocketFactory((SSLSocketFactory) trustingFactory);
 
   }
 
