@@ -41,7 +41,7 @@ public class ContactDaoTest {
 
   @Test
   public void findUserByLastNameShouldReturnEmptyList() {
-    List<AppUser> users = contactDAO.findUserByLastName("asdfjlksjfdldsjlkfjds");
+    List<AppUser> users = contactDAO.findUserByLastName("asdfjlk--'sjfdldsjlkfjds");
 
     assertNotNull(users);
     assertTrue(users.isEmpty());
@@ -57,7 +57,7 @@ public class ContactDaoTest {
 
     List<AppUser> users = contactDAO.findUserByLastName("Addicks");
 
-    assertTrue(users.size() == 1);
+    assertTrue(users.size() == 2);
     assertEquals(user, users.get(0));
 
   }

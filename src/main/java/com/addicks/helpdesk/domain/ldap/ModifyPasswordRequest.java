@@ -36,6 +36,21 @@ public class ModifyPasswordRequest implements ExtendedRequest, Serializable {
    */
   private static final long serialVersionUID = 1L;
 
+  /** The OID of the modify password extended operation */
+  public static final String LDAP_EXOP_X_MODIFY_PASSWD = "1.3.6.1.4.1.4203.1.11.1";
+
+  /** The BER tag for the modify password dn entry */
+  private static final byte LDAP_TAG_EXOP_X_MODIFY_PASSWD_ID = (byte) 0x80;
+
+  /** The BER tag for the modify password new password entry */
+  private static final byte LDAP_TAG_EXOP_X_MODIFY_PASSWD_NEW = (byte) 0x82;
+
+  /** The dn we want to change */
+  private String mDn;
+
+  /** The password to change to */
+  private String mPassword;
+
   /**
    * Creates a new <code>ModifyPasswordRequest</code> instance.
    * 
@@ -156,18 +171,4 @@ public class ModifyPasswordRequest implements ExtendedRequest, Serializable {
     return null;
   }
 
-  /** The OID of the modify password extended operation */
-  public static final String LDAP_EXOP_X_MODIFY_PASSWD = "1.3.6.1.4.1.4203.1.11.1";
-
-  /** The BER tag for the modify password dn entry */
-  private static final byte LDAP_TAG_EXOP_X_MODIFY_PASSWD_ID = (byte) 0x80;
-
-  /** The BER tag for the modify password new password entry */
-  private static final byte LDAP_TAG_EXOP_X_MODIFY_PASSWD_NEW = (byte) 0x82;
-
-  /** The dn we want to change */
-  private String mDn;
-
-  /** The password to change to */
-  private String mPassword;
 }
